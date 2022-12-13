@@ -15,9 +15,9 @@ public interface UserService {
 
     Optional<UserEntity> findById(UUID id);
 
-    UserEntity save(UserRequest userRequest);
+    UserEntity save(UserRequest object);
 
     void deleteById(UUID id);
 
-    UserEntity update(UUID id, UserRequest userRequest);
+    UserEntity updateById(UUID id, UserRequest object);
 }

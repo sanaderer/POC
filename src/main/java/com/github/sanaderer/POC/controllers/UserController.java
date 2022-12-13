@@ -36,4 +36,17 @@ public class UserController {
     public Optional<UserEntity> getById(@PathVariable UUID id) {
         return userService.findById(id);
     }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteById(@PathVariable UUID id) {
+        userService.deleteById(id);
+    }
+
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public UserEntity updateById(@PathVariable UUID id, @RequestBody UserRequest object) {
+        return userService.updateById(id, object);
+    }
+
 }

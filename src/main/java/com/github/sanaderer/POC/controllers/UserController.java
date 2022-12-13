@@ -34,6 +34,6 @@ public class UserController {
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Optional<UserEntity> getById(@PathVariable UUID id) {
-        return Optional.ofNullable(userService.findById(id));
+        return userService.findById(id);
     }
 }

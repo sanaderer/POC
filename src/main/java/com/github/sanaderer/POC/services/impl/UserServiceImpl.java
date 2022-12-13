@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -24,7 +25,15 @@ public class UserServiceImpl implements UserService {
         UserEntity entity = userMapper.toEntity(object);
         return userRepository.save(entity);
     }
+    @Override
+    public List<UserEntity> findAll() {
+        return userRepository.findAll();
+    }
 
+    @Override
+    public Optional<UserEntity> findById(UUID id) {
+        return userRepository.findById(id);
+    }
     @Override
     public void deleteById(UUID id) {
 
@@ -32,16 +41,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserEntity update(UUID id, UserRequest userRequest) {
-        return null;
-    }
-
-    @Override
-    public List<UserEntity> findAll() {
-        return userRepository.findAll();
-    }
-
-    @Override
-    public UserEntity findById(UUID id) {
         return null;
     }
 

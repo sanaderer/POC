@@ -5,6 +5,7 @@ import com.github.sanaderer.POC.entities.UserEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -12,7 +13,7 @@ public interface UserService {
 
     List<UserEntity> findAll();
 
-    UserEntity findById(UUID id);
+    Optional<UserEntity> findById(UUID id);
 
     UserEntity save(UserRequest userRequest);
 

@@ -16,4 +16,12 @@ public class UserMapper {
         userEntity.setTelephone(Long.valueOf(userRequest.getTelephone().replaceAll(removeMask, "")));
         return userEntity;
     }
+
+    public UserEntity toUpdateEntity(UserRequest userUpdate, UserEntity userEntity) {
+        userEntity.setEmail(userUpdate.getEmail());
+        userEntity.setDocument(userUpdate.getDocument().replaceAll(removeMask, ""));
+        userEntity.setDocumentType(userUpdate.getDocumentType());
+        userEntity.setTelephone(Long.valueOf(userUpdate.getTelephone().replaceAll(removeMask, "")));
+        return userEntity;
+    }
 }

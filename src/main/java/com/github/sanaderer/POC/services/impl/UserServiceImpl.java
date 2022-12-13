@@ -36,12 +36,13 @@ public class UserServiceImpl implements UserService {
     }
     @Override
     public void deleteById(UUID id) {
-
+        userRepository.deleteById(id);
     }
 
     @Override
-    public UserEntity update(UUID id, UserRequest userRequest) {
-        return null;
+    public UserEntity updateById(UUID id, UserRequest object) {
+        UserEntity entity = userRepository.findById(id).orElseThrow(RuntimeException::new);
+        return userRepository.save(userMapper.toUpdateEntity(object, entity));
     }
 
 }

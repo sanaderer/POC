@@ -13,6 +13,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -35,8 +37,17 @@ public class AddressServiceImpl implements AddressService, CepService{
     public AddressEntity save(AddressRequest object, String cep) {
         AddressResponse addressResponse = cepService.getCep(cep);
         UserEntity user = userService.findById(object.getUserId());
+        validateAddress(user);
         AddressEntity entity = mapper.toEntity(addressResponse, object, user);
         return addressRepository.save(entity);
+    }
+    private void validateAddress(final UserEntity entity){
+        if(entity.getAddresses().size() >= 5){
+            List<AddressEntity> list = new ArrayList<>();
+            int indexOfLastAddress = (entity.getAddresses().size() - 1);
+            addressRepository.deleteById(entity.getId());
+            list.remove(indexOfLastAddress);
+        }
     }
 
     public AddressResponse getCep(@PathVariable String cep) {
@@ -45,7 +56,7 @@ public class AddressServiceImpl implements AddressService, CepService{
 
 
     public void deleteById(UUID id) {
-
+        addressRepository.deleteById(id);
     }
 
     public AddressEntity updateById(UUID id, AddressRequest object) {

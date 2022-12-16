@@ -1,5 +1,6 @@
 package com.github.sanaderer.POC.controller.requests;
 
+import com.github.sanaderer.POC.entity.AddressEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,4 +21,5 @@ public class AddressRequest {
     private UUID userId;
 
     private Boolean mainAddress;
+
 }

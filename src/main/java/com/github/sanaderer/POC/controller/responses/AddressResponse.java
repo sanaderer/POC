@@ -2,7 +2,6 @@ package com.github.sanaderer.POC.controller.responses;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.github.sanaderer.POC.entity.UserEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

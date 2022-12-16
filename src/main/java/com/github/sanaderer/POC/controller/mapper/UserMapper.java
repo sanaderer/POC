@@ -6,6 +6,8 @@ import com.github.sanaderer.POC.entity.UserEntity;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.stream.Collectors;
+
 @Configuration
 @AllArgsConstructor
 public class UserMapper {
@@ -28,6 +30,7 @@ public class UserMapper {
         return userEntity;
     }
 
+
     public static UserResponse toDto(UserEntity userEntity) {
         UserResponse response = new UserResponse();
         response.setId(userEntity.getId());
@@ -37,6 +40,7 @@ public class UserMapper {
         response.setTelephone(userEntity.getTelephone());
         response.setDateCreated(userEntity.getDateCreated());
         response.setDateUpdated(userEntity.getDateUpdated());
+        response.setAddresses(userEntity.getAddresses().stream().map(AddressMapper::toAddressDto).collect(Collectors.toList()));
         return response;
     }
 

@@ -63,4 +63,8 @@ public class UserEntity {
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.EAGER)
     private List<AddressEntity> addresses = new ArrayList<>();
+
+    public void addAddress(AddressEntity addressEntity){
+        addresses.add(addressEntity);
+    }
 }

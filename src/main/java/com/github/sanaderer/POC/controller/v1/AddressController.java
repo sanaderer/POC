@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+import java.util.UUID;
+
 import static com.github.sanaderer.POC.controller.mapper.AddressMapper.toAddressDto;
 
 
@@ -29,7 +31,7 @@ public class AddressController {
 
     @PostMapping("/{cep}")
     @ResponseStatus(HttpStatus.CREATED)
-    public AddressResponse save(@Valid @RequestBody AddressRequest object, @PathVariable String cep) {
+    public AddressResponse save(@Valid @RequestBody AddressRequest object, @PathVariable String cep, UUID user_id) {
         return toAddressDto(addressService.save(object, cep));
     }
 

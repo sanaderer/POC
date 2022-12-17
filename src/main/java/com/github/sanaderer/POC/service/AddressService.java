@@ -11,7 +11,7 @@ public interface AddressService {
 
     AddressEntity findById(UUID id);
 
-    AddressEntity save(AddressRequest object, String cep);
+    AddressEntity save(AddressRequest object, String cep, AddressEntity addressEntity);
 
     void deleteById(UUID id);
 

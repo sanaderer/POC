@@ -2,6 +2,7 @@ package com.github.sanaderer.POC.controller.v1;
 
 import com.github.sanaderer.POC.controller.requests.AddressRequest;
 import com.github.sanaderer.POC.controller.responses.AddressResponse;
+import com.github.sanaderer.POC.entity.AddressEntity;
 import com.github.sanaderer.POC.service.AddressService;
 import com.github.sanaderer.POC.service.CepService;
 import lombok.RequiredArgsConstructor;
@@ -31,8 +32,8 @@ public class AddressController {
 
     @PostMapping("/{cep}")
     @ResponseStatus(HttpStatus.CREATED)
-    public AddressResponse save(@Valid @RequestBody AddressRequest object, @PathVariable String cep, UUID user_id) {
-        return toAddressDto(addressService.save(object, cep));
+    public AddressResponse save(@Valid @RequestBody AddressRequest object, @PathVariable String cep, AddressEntity addressEntity) {
+        return toAddressDto(addressService.save(object, cep, addressEntity));
     }
 
 }

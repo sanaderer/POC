@@ -12,12 +12,11 @@ import java.util.UUID;
 @AllArgsConstructor
 public class AddressRequest {
 
+    private UUID userId;
+
     @NotBlank
     private String number;
 
     private String observation;
 
-    private UUID userId;
-
-    private Boolean mainAddress;
 }

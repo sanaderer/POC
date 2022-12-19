@@ -1,6 +1,7 @@
 package com.github.sanaderer.POC.service;
 
 import com.github.sanaderer.POC.controller.requests.UserRequest;
+import com.github.sanaderer.POC.entity.AddressEntity;
 import com.github.sanaderer.POC.entity.UserEntity;
 import org.springframework.stereotype.Service;
 
@@ -19,4 +20,5 @@ public interface UserService {
     void deleteById(UUID id);
 
     UserEntity updateById(UUID id, UserRequest object);
+
 }

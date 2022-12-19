@@ -13,11 +13,12 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
-public class AddressServiceImpl implements AddressService, CepService{
+public class AddressServiceImpl implements AddressService, CepService {
 
     private final AddressRepository addressRepository;
 
@@ -29,14 +30,25 @@ public class AddressServiceImpl implements AddressService, CepService{
 
 
     public AddressEntity findById(UUID id) {
-        return null;
+        return addressRepository.getReferenceById(id);
     }
 
-    public AddressEntity save(AddressRequest object, String cep) {
+    public AddressEntity save(AddressRequest object, String cep, AddressEntity addressEntity) {
         AddressResponse addressResponse = cepService.getCep(cep);
-        UserEntity user = userService.findById(object.getUserId());
-        AddressEntity entity = mapper.toEntity(addressResponse, object, user);
-        return addressRepository.save(entity);
+        UserEntity userEntity = userService.findById(object.getUserId());
+        AddressEntity toEntity = mapper.toEntity(addressResponse, object, userEntity);
+        limitAddressesValidation(userEntity);
+        toEntity.setMainAddress(true);
+        return addressRepository.save(toEntity);
+    }
+
+    private void limitAddressesValidation(UserEntity userEntity) {
+        List<AddressEntity> list = addressRepository.findByUserOrderByDateCreated(userEntity);
+        list.forEach(addressEntity -> addressEntity.setMainAddress(false));
+        addressRepository.saveAllAndFlush(list);
+        if(list.size() >= 5){
+            addressRepository.delete(list.get(0));
+        }
     }
 
     public AddressResponse getCep(@PathVariable String cep) {
@@ -45,7 +57,7 @@ public class AddressServiceImpl implements AddressService, CepService{
 
 
     public void deleteById(UUID id) {
-
+        addressRepository.deleteById(id);
     }
 
     public AddressEntity updateById(UUID id, AddressRequest object) {

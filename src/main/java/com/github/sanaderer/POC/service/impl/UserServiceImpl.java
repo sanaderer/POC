@@ -2,14 +2,12 @@ package com.github.sanaderer.POC.service.impl;
 
 import com.github.sanaderer.POC.controller.mapper.UserMapper;
 import com.github.sanaderer.POC.controller.requests.UserRequest;
-import com.github.sanaderer.POC.entity.AddressEntity;
 import com.github.sanaderer.POC.entity.UserEntity;
 import com.github.sanaderer.POC.repository.UserRepository;
 import com.github.sanaderer.POC.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 

@@ -59,7 +59,7 @@ public class UserEntity {
     private LocalDateTime dateUpdated;
 
     @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
     private List<AddressEntity> addresses = new ArrayList<>();
 
 }

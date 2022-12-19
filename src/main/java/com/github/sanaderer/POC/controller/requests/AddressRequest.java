@@ -19,6 +19,4 @@ public class AddressRequest {
 
     private String observation;
 
-    private Boolean mainAddress;
-
 }

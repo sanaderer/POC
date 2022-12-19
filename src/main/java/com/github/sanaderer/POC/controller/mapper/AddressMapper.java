@@ -20,7 +20,6 @@ public class AddressMapper {
         entity.setNeighborhood(addressResponse.getNeighborhood());
         entity.setCity(addressResponse.getCity());
         entity.setState(addressResponse.getState());
-        entity.setMainAddress(addressRequest.getMainAddress());
         entity.setUser(userEntity);
         return entity;
     }

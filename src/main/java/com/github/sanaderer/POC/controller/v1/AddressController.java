@@ -38,4 +38,11 @@ public class AddressController {
     public void deleteById(@PathVariable UUID id){
         addressService.deleteById(id);
     }
+
+    @PutMapping(path = "/{id}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public AddressResponse update(@PathVariable UUID id, @RequestBody AddressRequest addressRequest){
+        return toAddressDto(addressService.updateById(id, addressRequest));
+    }
+
 }

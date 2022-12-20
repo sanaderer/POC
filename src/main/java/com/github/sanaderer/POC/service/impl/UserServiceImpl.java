@@ -40,8 +40,8 @@ public class UserServiceImpl implements UserService {
     }
 
     public List<AddressEntity> getAddressByUserId(UUID id) {
-        var customer = findById(id);
-        return customer.getAddresses();
+        var user = findById(id);
+        return user.getAddresses();
     }
 
     public void deleteById(UUID id) {

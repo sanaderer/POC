@@ -51,6 +51,8 @@ public class AddressEntity {
 
     private String complement;
 
+    private String observation;
+
     @JsonIgnore
     private Boolean mainAddress;
 

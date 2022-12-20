@@ -62,7 +62,8 @@ public class AddressServiceImpl implements AddressService, CepService {
     }
 
     public AddressEntity updateById(UUID id, AddressRequest object) {
-        return null;
+       AddressEntity addressEntity = addressRepository.findById(id).orElseThrow(RuntimeException::new);
+       return addressRepository.save(AddressMapper.toUpdateAddress(object, addressEntity));
     }
 
 }

@@ -17,6 +17,7 @@ public class AddressMapper {
         entity.setStreet(addressResponse.getStreet());
         entity.setComplement(addressResponse.getComplement());
         entity.setNumber(addressRequest.getNumber());
+        entity.setObservation(addressRequest.getObservation());
         entity.setNeighborhood(addressResponse.getNeighborhood());
         entity.setCity(addressResponse.getCity());
         entity.setState(addressResponse.getState());
@@ -30,6 +31,7 @@ public class AddressMapper {
         response.setStreet(entity.getStreet());
         response.setComplement(entity.getComplement());
         response.setNumber(entity.getNumber());
+        response.setObservation(entity.getObservation());
         response.setNeighborhood(entity.getNeighborhood());
         response.setCity(entity.getCity());
         response.setState(entity.getState());
@@ -39,5 +41,11 @@ public class AddressMapper {
         response.setId(entity.getId());
         response.setUserId(entity.getUser().getId());
         return response;
+    }
+
+    public static AddressEntity toUpdateAddress(AddressRequest addressUpdate, AddressEntity addressEntity){
+        addressEntity.setNumber(addressUpdate.getNumber());
+        addressEntity.setObservation(addressUpdate.getObservation());
+        return addressEntity;
     }
 }

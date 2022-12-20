@@ -49,9 +49,10 @@ public class UserController {
 
     @GetMapping(path = "/search")
     @ResponseStatus(HttpStatus.OK)
-    public Page<UserEntity> findByType(@RequestParam String documentType, @PageableDefault(size = 5, direction = Sort.Direction.ASC, sort = "id") Pageable pageable) {
+    public Page<UserResponse> findByType(@RequestParam String documentType, @PageableDefault(size = 5, direction = Sort.Direction.ASC, sort = "id") Pageable pageable) {
         UserEnum userEnum = UserEnum.valueOf(documentType.toUpperCase());
-        return userService.findByDocumentType(userEnum, pageable);
+        Page<UserEntity> users = userService.findByDocumentType(userEnum, pageable);
+        return users.map(UserMapper::toDto);
     }
 
     @GetMapping(path = "/{id}")

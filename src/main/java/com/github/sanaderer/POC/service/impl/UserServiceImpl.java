@@ -2,6 +2,7 @@ package com.github.sanaderer.POC.service.impl;
 
 import com.github.sanaderer.POC.controller.mapper.UserMapper;
 import com.github.sanaderer.POC.controller.requests.UserRequest;
+import com.github.sanaderer.POC.entity.AddressEntity;
 import com.github.sanaderer.POC.entity.UserEntity;
 import com.github.sanaderer.POC.enums.UserEnum;
 import com.github.sanaderer.POC.repository.UserRepository;
@@ -36,6 +37,11 @@ public class UserServiceImpl implements UserService {
 
     public UserEntity findById(UUID id) {
         return userRepository.getReferenceById(id);
+    }
+
+    public List<AddressEntity> getAddressByUserId(UUID id) {
+        var customer = findById(id);
+        return customer.getAddresses();
     }
 
     public void deleteById(UUID id) {

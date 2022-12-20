@@ -1,13 +1,13 @@
 package com.github.sanaderer.POC.controller.requests;
 
-import com.github.sanaderer.POC.entity.AddressEntity;
-import com.github.sanaderer.POC.entity.UserEntity;
 import com.github.sanaderer.POC.enums.UserEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -21,7 +21,7 @@ import java.util.List;
 public class UserRequest {
 
     @NotBlank
-    @Email(message = "Invalid email")
+    @Email(message = "Please enter a valid email")
     @Length(max=100, message = "Email must be a maximum of 100 characters")
     private String email;
 
@@ -30,10 +30,12 @@ public class UserRequest {
     private String telephone;
 
     @NotBlank
-    //@Pattern(regexp = "^(((\\\\d{3}).(\\\\d{3}).(\\\\d{3})-(\\\\d{2}))?((\\\\d{2}).(\\\\d{3}).(\\\\d{3})/(\\\\d{4})-(\\\\d{2}))?)*$\", message = \"CPF: 000.000.000-00 / CNPJ: 00.000.000/0000-00")
+    @Pattern(regexp = "(^\\d{3}.\\d{3}.\\d{3}-\\d{2}$)|(^\\d{2}.\\d{3}.\\d{3}/\\d{4}-\\d{2}$)",
+            message = "Enter CPF/CNPJ with complete format")
     private String document;
 
     @NotNull
+    @Enumerated(EnumType.STRING)
     private UserEnum documentType;
 
     private List<AddressRequest> addresses = new ArrayList<>();

@@ -1,18 +1,22 @@
 package com.github.sanaderer.POC.controller.v1;
 
+import com.github.sanaderer.POC.controller.mapper.UserMapper;
 import com.github.sanaderer.POC.controller.requests.UserRequest;
 import com.github.sanaderer.POC.controller.responses.UserResponse;
 import com.github.sanaderer.POC.entity.UserEntity;
+import com.github.sanaderer.POC.enums.UserEnum;
 import com.github.sanaderer.POC.service.UserService;
-import com.github.sanaderer.POC.controller.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 import static com.github.sanaderer.POC.controller.mapper.UserMapper.toDto;
 
@@ -30,9 +34,17 @@ public class UserController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<UserResponse> findAll() {
-        List<UserEntity> entityList = userService.findAll();
-        return entityList.stream().map(UserMapper::toDto).collect(Collectors.toList());
+    public Page<UserResponse> findAll(@PageableDefault(size = 5, direction = Sort.Direction.ASC, sort = "id") Pageable pageable) {
+        Page<UserEntity> page = userService.findAll(pageable);
+        return page.map(UserMapper::toDto);
+    }
+
+    @GetMapping(path = "/search")
+    @ResponseStatus(HttpStatus.OK)
+    public Page<UserEntity> findByType(@RequestParam String documentType, @PageableDefault(size = 5, direction = Sort.Direction.ASC, sort = "id") Pageable pageable) {
+        UserEnum userEnum = UserEnum.valueOf(documentType.toUpperCase());
+        Page<UserEntity> users = userService.findByDocumentType(userEnum, pageable);
+        return users;
     }
 
     @GetMapping(path = "/{id}")

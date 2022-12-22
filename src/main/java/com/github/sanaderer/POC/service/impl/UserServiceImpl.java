@@ -5,6 +5,8 @@ import com.github.sanaderer.POC.controller.requests.UserRequest;
 import com.github.sanaderer.POC.entity.AddressEntity;
 import com.github.sanaderer.POC.entity.UserEntity;
 import com.github.sanaderer.POC.enums.UserEnum;
+import com.github.sanaderer.POC.exceptions.MainAddressException;
+import com.github.sanaderer.POC.exceptions.UserNotFound;
 import com.github.sanaderer.POC.repository.UserRepository;
 import com.github.sanaderer.POC.service.UserService;
 import lombok.AllArgsConstructor;
@@ -36,7 +38,7 @@ public class UserServiceImpl implements UserService {
     }
 
     public UserEntity findById(UUID id) {
-        return userRepository.getReferenceById(id);
+        return userRepository.findById(id).orElseThrow();
     }
 
     public List<AddressEntity> getAddressByUserId(UUID id) {

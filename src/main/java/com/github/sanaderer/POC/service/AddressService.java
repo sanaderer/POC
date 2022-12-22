@@ -2,6 +2,7 @@ package com.github.sanaderer.POC.service;
 
 import com.github.sanaderer.POC.controller.requests.AddressRequest;
 import com.github.sanaderer.POC.entity.AddressEntity;
+import com.github.sanaderer.POC.entity.UserEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;

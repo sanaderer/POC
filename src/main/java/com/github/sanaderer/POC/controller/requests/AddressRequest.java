@@ -19,4 +19,6 @@ public class AddressRequest {
 
     private String observation;
 
+    private Boolean isMain = false;
+
 }

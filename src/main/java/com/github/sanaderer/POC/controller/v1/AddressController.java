@@ -3,6 +3,7 @@ package com.github.sanaderer.POC.controller.v1;
 import com.github.sanaderer.POC.controller.requests.AddressRequest;
 import com.github.sanaderer.POC.controller.responses.AddressResponse;
 import com.github.sanaderer.POC.entity.AddressEntity;
+import com.github.sanaderer.POC.entity.UserEntity;
 import com.github.sanaderer.POC.service.AddressService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

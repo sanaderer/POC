@@ -3,9 +3,11 @@ package com.github.sanaderer.POC.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.github.sanaderer.POC.enums.UserEnum;
+import com.github.sanaderer.POC.repository.UserRepository;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -63,5 +65,12 @@ public class UserEntity {
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
     private List<AddressEntity> addresses = new ArrayList<>();
+
+//    public void setAllAddressTrue() {
+//        if(addresses.isEmpty()){
+//            AddressEntity entity = addresses.get(addresses.size() - 1);
+//            entity.setMainAddress(true);
+//        }
+//    }
 
 }
